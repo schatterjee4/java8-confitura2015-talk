@@ -1,10 +1,7 @@
 package pl.touk;
 
-import static java.util.stream.Collectors.*;
-
-import pl.touk.domain.Address;
-import pl.touk.domain.City;
-import pl.touk.domain.Person;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +12,10 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import pl.touk.domain.Address;
+import pl.touk.domain.City;
+import pl.touk.domain.Person;
 
 public class WorkshopStream {
     Collection<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -79,7 +80,7 @@ public class WorkshopStream {
                 .collect(Collectors.joining(","));
     }
 
-    public static void main(String[] args) {
+    public void notConsumedStream() {
         final Stream<Integer> stream = Stream.of(1, 2, 3)
                 .map(i -> {
                     System.out.println(i.toString());
@@ -88,6 +89,18 @@ public class WorkshopStream {
         // prints nothing :(
     }
 
+    @SuppressWarnings("Convert2MethodRef")
+    public static void main(String[] args) {
 
+        Stream.of("a", "b", "c")
+                .map(s -> s.toUpperCase())
+                .map(s -> s + "_postfix")
+                .forEach(e -> System.out.println(e));
+
+        //A_postfix
+        //B_postfix
+        //C_postfix
+
+    }
 
 }
